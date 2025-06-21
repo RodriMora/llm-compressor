@@ -32,7 +32,7 @@ def process_safetensors_file(file_path):
             print("Quantizing", name)
             qweight, scale = per_tensor_quantize(tensor)
             modified_tensors[name] = qweight
-            modified_tensors[f"{name[:-len("weight")]}qscale_weight"] = scale
+            modified_tensors[f"{name[:-len('weight')]}qscale_weight"] = scale
         else:
             modified_tensors[name] = tensor
 
@@ -49,7 +49,7 @@ def update_index_file(index_file_path):
     for tensor_name, file_name in index['weight_map'].items():
         new_weight_map[tensor_name] = file_name
         if is_quantizable(tensor_name):
-            new_weight_map[f"{tensor_name[:-len("weight")]}qscale_weight"] = file_name
+            new_weight_map[f"{tensor_name[:-len('weight')]}qscale_weight"] = file_name
     
     index['weight_map'] = new_weight_map
     
